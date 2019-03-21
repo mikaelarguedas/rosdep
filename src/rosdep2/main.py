@@ -448,6 +448,12 @@ def _package_args_handler(command, parser, options, args):
                     os.pathsep,
                     os.environ['ROS_PACKAGE_PATH']
                 )
+            if 'AMENT_PREFIX_PATH' in os.environ:
+                os.environ['ROS_PACKAGE_PATH'] = '{0}{1}{2}'.format(
+                    os.environ['ROS_PACKAGE_PATH'],
+                    os.pathsep,
+                    os.environ['AMENT_PREFIX_PATH']
+                )
             pkgs = find_catkin_packages_in(path, options.verbose)
             packages.extend(pkgs)
         # Make packages list unique
